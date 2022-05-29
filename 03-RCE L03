@@ -1,0 +1,48 @@
+
+# 비주얼 베이직에서 스트링 비교함수는?
+
+-----
+일단 dbg를 해보자.
+
+MSVBVM50.DLL 파일이 없어서 실행할수 없다고 뜬다.
+검색을 통해서 사이트에서 파일을 다운로드한다.
+https://ko.dll-files.com/msvbvm50.dll.html
+
+파일을 압축해제를 한다음에 이블로그대로 진행
+https://boksbooks.tistory.com/67
+
+파일을 실행이 가능하게 됐다. 근데 이게 먼뜬인가 돌려보자.
+
+Nag Meldung
+Entferne diesen Nag, oder bekomme das richtige passwort heraus!
+번역기를 돌려보니 독일어이다. 해석은
+Nag 메시지
+이 Nag를 제거하거나 올바른 암호를 얻으십시오!
+
+이후 파일이 실행이 되며 입력칸이 나온다. 패스워드를 입력해야하는 것처럼 보인다. 
+Das passwort ist falsch!  -> 암호가 잘못되었습니다! 
+
+올리디버거를 돌려서 암호를 찾아야 할거 같다.
+일단 비주얼베이직의 스트링비교함수가 무엇일까?
+올리디버거로 진행을 했으나 먼가 제대로 작동이 안돼는거 같아 한번 IDAFreeware로 진행
+
+IDAFreeware에서 MSVBVM50.DLL로 작동시킬수 있게 하니 잘 돼는거 같다. 스트링비교 함수라고 검색하니 비주얼베이직 스트링비교함수는
+StrComp 라는함수이다. 
+문자열을 비교해서 같으먄 0, 틀리면은 1이 나온다. 
+
+https://appia.tistory.com/473
+
+이후 vbastrcmp 함수를 눌러서 확인하니 sub_40263C라는 것과 관련이 나와 클릭해서 함수에 들어간다.
+이후에 들어가니 반복적으로 나오는 상수 offset a2g83g35hs2 ; 2G83G35Hs2 가 나온다. 한번 코드에 입력해본다.
+
+
+https://adipo.tistory.com/entry/%EC%96%B4%EC%85%88%EB%B8%94%EB%A6%AC%EC%96%B4-MASMMicrosoft-Macro-Assembler  #어셈블리어 블로그
+jge: op1>=op2 이면은 점프
+jz:  ZF가 0일때 이동
+
+
+파일에 암호를 2G83G35Hs2 를 입력하면은 성공이다.
+
+
+
+
