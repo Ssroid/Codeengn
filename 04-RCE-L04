@@ -33,3 +33,6 @@ TEST의 결과는 ZF에 저장이 돼는데 값이 1이면 ZF는 0, 값이 0이�
 
 어셈블리어 추가는 없나?
 혹은 TEST EAX, EAX -> TEST EAX, ESI 로 바꾼다면 항상 그 값은 ZF가 1로 설정되게 돼어 정상만뜨게 할수있다.
+
+패치한파일을 저장하는 법
+https://blog.naver.com/errorsoft666/221621894042
