@@ -1,0 +1,15 @@
+파일을 실행을하니 키값을 넣고 정답이 아닐땐 아무반응이없다.
+
+PEview로 봐보니 다행이 패킹이 되어있진 않는거 같다. 휴
+올리디버거로 해보자.
+
+GetDlgitemint : 대화 상자에서 지정된 컨트롤의 텍스트를 정수 값으로 변환합니다.
+https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdlgitemint
+
+CMP eax, 7A2896BF 로 EAX값을 수정하거나 JNE에서 ZF를 1로 설정해서진행하면은
+
+성공 메시지박스가 뜨고
+메시지박스 내용 메모리 주소로 이동해서 값을 변경하고 변경 끝엔 뒤에 NULL(00)을
+집어넣어 문장의 끝을 구분해서 실행하면은 우리가 원하는대로 메시지박스내용이 변경된다.
+
+
